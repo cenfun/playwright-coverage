@@ -1,0 +1,18 @@
+{
+    "name": "playwright-coverage",
+    "version": "1.0.0",
+    "description": "Playwright Coverage Reports",
+    "main": "index.js",
+    "scripts": {
+        "test": "npx playwright test"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "@playwright/test": "^1.42.1",
+        "@types/node": "^20.11.30",
+        "eslint": "^8.57.0",
+        "eslint-config-plus": "^1.0.6",
+        "monocart-coverage-reports": "^2.7.6"
+    },
+    "dependencies": {}
+}
