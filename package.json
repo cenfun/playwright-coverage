@@ -7,12 +7,12 @@
         "test": "npx playwright test"
     },
     "license": "MIT",
+    "dependencies": {},
     "devDependencies": {
-        "@playwright/test": "^1.42.1",
-        "@types/node": "^20.11.30",
-        "eslint": "^8.57.0",
-        "eslint-config-plus": "^1.0.6",
-        "monocart-coverage-reports": "^2.7.6"
-    },
-    "dependencies": {}
+        "@playwright/test": "^1.43.1",
+        "@types/node": "^20.12.8",
+        "eslint": "^9.1.1",
+        "eslint-config-plus": "^2.0.0",
+        "monocart-coverage-reports": "^2.7.10"
+    }
 }

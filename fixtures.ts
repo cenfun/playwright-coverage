@@ -3,7 +3,9 @@ import MCR from 'monocart-coverage-reports';
 import coverageOptions from './mcr.config';
 
 // fixtures
-const test = testBase.extend({
+const test = testBase.extend<{
+    autoTestFixture: string
+}>({
     autoTestFixture: [async ({ page }, use) => {
 
         const isChromium = test.info().project.name === 'chromium';

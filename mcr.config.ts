@@ -1,10 +1,14 @@
-export default {
+import { CoverageReportOptions} from "monocart-coverage-reports"
 
-    name: 'My Playwright Coverage Report',
+// https://github.com/cenfun/monocart-coverage-reports
+const coverageOptions: CoverageReportOptions = {
+
+    name: 'My Playwright BDD Coverage Report',
 
     reports: [
         'console-details',
-        'v8'
+        'v8',
+        "lcovonly"
     ],
 
     // entryFilter: {
@@ -12,5 +16,12 @@ export default {
     //     '**/*.js': true
     // },
 
+    // sourceFilter: {
+    //     '**/node_modules/**': false,
+    //     '**/*.js': true
+    // },
+
     outputDir: './coverage-reports'
-};
+}
+
+export default coverageOptions
