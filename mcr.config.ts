@@ -3,7 +3,7 @@ import { CoverageReportOptions} from "monocart-coverage-reports"
 // https://github.com/cenfun/monocart-coverage-reports
 const coverageOptions: CoverageReportOptions = {
 
-    name: 'My Playwright BDD Coverage Report',
+    name: 'My Playwright Coverage Report',
 
     reports: [
         'console-details',
