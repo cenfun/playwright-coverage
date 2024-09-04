@@ -1,4 +1,4 @@
-import { test as testBase } from '@playwright/test';
+import { test as testBase, Page } from '@playwright/test';
 import MCR from 'monocart-coverage-reports';
 import coverageOptions from './mcr.config';
 
@@ -6,35 +6,40 @@ import coverageOptions from './mcr.config';
 const test = testBase.extend<{
     autoTestFixture: string
 }>({
-    autoTestFixture: [async ({ page }, use) => {
+    autoTestFixture: [async ({ context }, use) => {
 
         const isChromium = test.info().project.name === 'chromium';
+
+        const handlePageEvent = async (page: Page) => {
+            await Promise.all([
+                page.coverage.startJSCoverage({
+                    resetOnNavigation: false,
+                }),
+                page.coverage.startCSSCoverage({
+                    resetOnNavigation: false,
+                }),
+            ]);
+        };
 
         // console.log('autoTestFixture setup...');
         // coverage API is chromium only
         if (isChromium) {
-            await Promise.all([
-                page.coverage.startJSCoverage({
-                    resetOnNavigation: false
-                }),
-                page.coverage.startCSSCoverage({
-                    resetOnNavigation: false
-                })
-            ]);
+            context.on('page', handlePageEvent);
         }
 
         await use('autoTestFixture');
 
         // console.log('autoTestFixture teardown...');
         if (isChromium) {
-            const [jsCoverage, cssCoverage] = await Promise.all([
-                page.coverage.stopJSCoverage(),
-                page.coverage.stopCSSCoverage()
-            ]);
-            const coverageList = [... jsCoverage, ... cssCoverage];
+            context.off('page', handlePageEvent);
+            const coverageList = await Promise.all(context.pages().map(async (page) => {
+              const jsCoverage = await page.coverage.stopJSCoverage();
+              const cssCoverage = await page.coverage.stopCSSCoverage();
+              return [...jsCoverage, ...cssCoverage];
+            }));
             // console.log(coverageList.map((item) => item.url));
             const mcr = MCR(coverageOptions);
-            await mcr.add(coverageList);
+            await mcr.add(coverageList.flat());
         }
 
     }, {
