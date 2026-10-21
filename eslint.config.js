@@ -1,7 +1,8 @@
-// https://eslint.org/docs/rules/
+import plus from 'eslint-config-plus';
 
-const plus = require('eslint-config-plus');
-
-module.exports = [
+export default [
+    {
+        ignores: ['coverage-reports/**', 'playwright-report/**', 'test-results/**']
+    },
     plus
 ];

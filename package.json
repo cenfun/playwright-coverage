@@ -2,17 +2,20 @@
     "name": "playwright-coverage",
     "version": "1.0.0",
     "description": "Playwright Coverage Reports",
-    "main": "index.js",
+    "private": true,
+    "type": "module",
+    "engines": {
+        "node": "^22.15.0 || >=24.0.0"
+    },
     "scripts": {
-        "test": "npx playwright test"
+        "test": "playwright test",
+        "lint": "eslint . --max-warnings=0"
     },
     "license": "MIT",
-    "dependencies": {},
     "devDependencies": {
-        "@playwright/test": "^1.43.1",
-        "@types/node": "^20.12.8",
-        "eslint": "^9.1.1",
-        "eslint-config-plus": "^2.0.0",
-        "monocart-coverage-reports": "^2.7.10"
+        "@playwright/test": "^1.64.1",
+        "eslint": "^10.13.0",
+        "eslint-config-plus": "^2.1.0",
+        "monocart-coverage-reports": "^3.0.0"
     }
 }
